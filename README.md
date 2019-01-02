@@ -1,2 +1,3 @@
-# boocamp19-exercises
+# bootcamp19-exercises
+
 Exercises for the 2019 DEV Winter bootcamp
