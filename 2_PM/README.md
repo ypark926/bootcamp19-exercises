@@ -36,11 +36,14 @@ You will create an account on the Google Maps API, initialize a Node.js reposito
 
 - First, to use the Google Places API, we have to create a client object. This should be done in its own file, `google_api.js`. Read the `google-maps-services-js` docs (`docs/HOME.md`) to figure out how to do this, and then export this connection object from this file so that it can be used in other projects. It would be inefficient to create a new connection every time we needed to use the API. Yay for modularity!
 
-6. Write a program which takes a place name and returns a formatted message (see below) about that place.
+6. Write a program which takes a place name as a command line argument and returns a formatted message (see below) about that place.
 
 - In `placeinfo.js`, import the connection object made in `google_api.js`, and use it to query the Google Places API about the placename inputted via the command line.
 - https://developers.google.com/places/web-service/search has information about the parameters and response shape of this desired query.
+- You can access the command line argument via `process.argv[2]`. (The first two elements of this array are 'node', and the filename, respectively).
 - https://github.com/googlemaps/google-maps-services-js/blob/master/docs/HOME.md has information about how you can make the query through the Node package.
 - The following message should be printed out to the user: 'INPUTTED_PLACE is located at coordinates RETURNED_COORDINATES, at the address RETURNED_ADDRESS.'
 - We will have to use promises here to make API requests - read the bit in the `google-maps-services-js` docs (in `HOME.md`) about using promises, in the 'Making API Requests' section. You can use either `.then()` syntax or `async / await` syntax: see lecture from yesterday for examples.
 - Make sure you handle errors correctly - the shape of the return object will be different if no results are returned.
+
+7. Test your program! You can run it by `cd`ing into this directory and running `node placeinfo.js PLACE_NAME_ARGUMENT`

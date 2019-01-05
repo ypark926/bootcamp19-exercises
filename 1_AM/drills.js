@@ -1,3 +1,5 @@
+const assert = require("assert");
+
 // Feel free to look things up online!
 
 const reverse = str => {
@@ -37,3 +39,8 @@ const announceDate = () => {
 };
 
 // Write tests here:
+
+assert(1 < 2);
+assert(1 + 2 === 3);
+assert([2, 3][0] === 2);
+// asssert (reverse("3df") === "fd3")
