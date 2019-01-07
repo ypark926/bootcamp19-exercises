@@ -2,16 +2,16 @@ const assert = require("assert");
 
 // Feel free to look things up online!
 
+const tokenize = str => {
+  // TODO - write a function which converts a multi-word string into an array of words
+};
+
 const reverse = str => {
   // TODO - write a function which reverses the string
 };
 
 const uniqueOnes = arr => {
-  // TODO - write a function which removes all non-unique elemenets from an array
-};
-
-const tokenize = str => {
-  // TODO - write a function which converts a multi-word string into an array of words
+  // TODO - write a function which returns the inputted array without duplicate elements
 };
 
 const factorial = num => {
@@ -24,7 +24,7 @@ const zip = (arr1, arr2) => {
   // Example: zip([1, 2, 3], [5, 3, 1]) === [[1, 5], [2, 3], [3, 1]]
 };
 
-const unzip = (arr1, arr2) => {
+const unzip = arr => {
   // TODO - Write a function which does the opposite of `zip()`
 };
 

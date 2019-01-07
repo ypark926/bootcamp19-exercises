@@ -7,7 +7,7 @@ const triple = () => {
   // TODO
 };
 
-Array.prototype.map = () => {
+Array.prototype.map = function(fun) {
   // TODO
 };
 

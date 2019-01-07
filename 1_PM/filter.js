@@ -7,7 +7,7 @@ const multOf7 = el => {
   // TODO
 };
 
-Array.prototype.filter = () => {
+Array.prototype.filter = function(fun) {
   // TODO
 };
 
