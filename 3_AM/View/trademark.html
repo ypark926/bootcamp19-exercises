@@ -25,7 +25,7 @@
         <a class="navbar-brand" href="#">randomly yoonique</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item active">
-            <a class="nav-link" href="#">house of quotes <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="quotes.html">house of quotes</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="magic8.html">magic8</a>
@@ -34,7 +34,7 @@
             <a class="nav-link disabled" href="game.html">flappy square</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="trademark.html">yooni trademarks</a>
+            <a class="nav-link disabled" href="#">yooni trademarks <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="timer.html">xmas time</a>
@@ -45,31 +45,32 @@
 
     <!-- Text -->
     <h1 class="header">
-      a penny for your thoughts.
+      some typical phrases i say/are said to me
     </h1>
 
-    <div id="quoteDisplay">
-      <!-- Quotes snow up here -->
-    </div>
-    <!-- Centered button -->
-    <div id="button1">
-        <button onclick="newQuote()" type="button" class="btn btn-dark">click for a new quote</button>
-    </div>
+    <button class="btn" onclick="typeWriter()">click me</button>
 
-    <script src="javascript.js"></script>
-
-    <p></p>
-    <p></p>
+    <p id="typewrite"></p>
 
     <!-- Ending -->
     <div>
-      created for hsa dev 2019
+      created for harvard cs50 2018
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+        var num = 0;
+        var text = 'more coffee. yikes. alllright. huhhhhh. yooni, weather. nIcE. yikes on bikes. i\'m so sad. yicycles on bicycles. i\'m overly caffeinated right now. this is true. this is definitely not true. that\'s objectively false. i want candy. wE gET iT. we really out here ______. omg i\'m dead. this is fine, i\'m fine, everything is fine. yooni, time.';
+        var speed = 50;
+
+        function typeWriter()
+        {
+          if (num < text.length)
+          {
+            document.getElementById("typewrite").innerHTML += text.charAt(num);
+            num++;
+            setTimeout(typeWriter, speed);
+          }
+        }
+    </script>
   </body>
 </html>

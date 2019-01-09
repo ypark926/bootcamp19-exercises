@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Title -->
+    <title>
+      randomly yoonique
+    </title>
+    <link href="styles.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#">randomly yoonique</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">house of quotes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="magic8.html">magic8</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">flappy square <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="trademark.html">yooni trademarks</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="timer.html">xmas time</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Text -->
+    <h1 class="header">
+      flappy square
+    </h1>
+</body>
+
+<!-- Implement Game -->
+<body onload="startGame()">
+
+    <script>
+    var myCoffee;
+    var stupidPoles = [];
+    var myScore;
+    var mySound;
+
+    // Showing screen components of game
+    function startGame()
+    {
+        myCoffee = new component(50, 50, "coffee.png", 10, 120, "image");
+        myCoffee.gravity = 0.05;
+        myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+        mySound = new sound("bounce.mp3");
+        gameboard.start();
+    }
+
+    // Creating "canvas" upon which game is presented
+    var gameboard =
+    {
+        canvas : document.createElement("canvas"),
+        start : function() {
+            this.canvas.width = 480;
+            this.canvas.height = 270;
+            this.context = this.canvas.getContext("2d");
+            document.body.insertBefore(this.canvas, document.body.childNodes[9]);
+            this.frameNo = 0;
+            this.interval = setInterval(updateGameArea, 20);
+            },
+        clear : function()
+        {
+            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        }
+    }
+
+    // Making sure all pieces of game are visible correctly
+    function component(width, height, color, x, y, type)
+    {
+        this.type = type;
+
+        if (type == "image")
+        {
+            this.image = new Image();
+            this.image.src = color;
+        }
+
+        this.score = 0;
+        this.width = width;
+        this.height = height;
+        this.sideSpeed = 0;
+        this.upSpeed = 0;
+        this.x = x;
+        this.y = y;
+        this.gravity = 0;
+        this.gravSpeed = 0;
+
+        // Update game board as it goes along
+        this.update = function()
+        {
+            ctx = gameboard.context;
+            if (type == "image") {
+                ctx.drawImage(this.image,
+                this.x,
+                this.y,
+                this.width, this.height);
+            }
+            else if (this.type == "text")
+            {
+                ctx.font = this.width + " " + this.height;
+                ctx.fillStyle = color;
+                ctx.fillText(this.text, this.x, this.y);
+            }
+            else
+            {
+                ctx.fillStyle = color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+        }
+
+        // Moving the piece
+        this.newPos = function()
+        {
+            this.gravSpeed += this.gravity;
+            this.x += this.sideSpeed;
+            this.y += this.upSpeed + this.gravSpeed;
+            this.hitBottom();
+        }
+
+        // Presenting game piece movement on the floor
+        this.hitBottom = function()
+        {
+            var floorgame = gameboard.canvas.height - this.height;
+            if (this.y > floorgame)
+            {
+                this.y = floorgame;
+                this.gravSpeed = 0;
+            }
+        }
+
+        // Showing collision with poles
+        this.collideWith = function(thing)
+        {
+            var thisLeft = this.x;
+            var thisRight = this.x + (this.width);
+            var thisTop = this.y;
+            var thisBot = this.y + (this.height);
+            var sndLeft = thing.x;
+            var sndRight = thing.x + (thing.width);
+            var sndTop = thing.y;
+            var sndBot = thing.y + (thing.height);
+            var collide = true;
+            if ((thisBot < sndTop) || (thisTop > sndBot) || (thisRight < sndLeft) || (thisLeft > sndRight))
+            {
+                collide = false;
+            }
+            return collide;
+        }
+    }
+
+    // Keeping the game looking accurate
+    function updateGameArea()
+    {
+        var x, height, hole, heightLower, heightUppr, smolHole, bigHole;
+        for (i = 0; i < stupidPoles.length; i += 1)
+        {
+            if (myCoffee.collideWith(stupidPoles[i]))
+            {
+                mySound.play();
+                gameboard.stop();
+                return;
+            }
+        }
+
+        gameboard.clear();
+        gameboard.frameNo += 1;
+
+        // Making sure poles are at a length where game is possible to play
+        if (gameboard.frameNo == 1 || everyinterval(150))
+        {
+            x = gameboard.canvas.width;
+            heightLower = 20;
+            heightUppr = 200;
+            height = Math.floor(Math.random() * (heightUppr-heightLower + 1) + heightLower);
+            smolHole = 80;
+            bigHole = 200;
+            hole = Math.floor(Math.random() * (bigHole - smolHole + 1) + smolHole);
+            stupidPoles.push(new component(10, height, "pink", x, 0));
+            stupidPoles.push(new component(10, x - height - hole, "pink", x, height + hole));
+        }
+
+        for (i = 0; i < stupidPoles.length; i += 1)
+        {
+            stupidPoles[i].x += -1;
+            stupidPoles[i].update();
+        }
+
+        myScore.text = "SCORE: " + gameboard.frameNo;
+        myScore.update();
+        myCoffee.newPos();
+        myCoffee.update();
+    }
+
+    // Sound effects
+    function sound(src) {
+        this.sound = document.createElement("audio");
+        this.sound.src = src;
+        this.sound.setAttribute("preload", "auto");
+        this.sound.setAttribute("controls", "none");
+        this.sound.style.display = "none";
+        document.body.appendChild(this.sound);
+        this.play = function(){
+            this.sound.play();
+        }
+        this.stop = function(){
+            this.sound.pause();
+        }
+    }
+
+
+    function everyinterval(n)
+    {
+        if ((gameboard.frameNo / n) % 1 == 0) {return true;}
+        return false;
+    }
+
+    // Showing the game piece speed up and slow down
+    function accelerate(n)
+    {
+        myCoffee.gravity = n;
+    }
+    </script>
+
+    <br>
+    <p>use the button to prevent coffee spillage (cuz who WANTS their coffee to die, right?)</p>
+    <button onmousedown="accelerate(-0.5)" onmouseup="accelerate(0.1)" class="btn btn-outline-success">float up</button>
+    <p>the challenge is...</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/I_izvAbhExY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </body>
+
+    <!-- Ending -->
+    <div>
+      created for hsa dev 2019
+    </div>
+
+</html>
+

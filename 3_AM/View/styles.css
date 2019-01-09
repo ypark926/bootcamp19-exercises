@@ -1,0 +1,101 @@
+body
+{
+    background-color: #fff;
+    font-family: sans-serif;
+    color: #A51C30;
+    text-align: center;
+}
+
+h1
+{
+    text-align: center;
+    font-style: inherit;
+}
+
+#quoteDisplay
+{
+    padding: 10px;
+    color: purple;
+    font-style: italic;
+}
+
+#button1
+{
+    text-align: center;
+}
+
+#answerDisplay
+{
+    padding: 10px;
+    color: blue;
+}
+
+/* Container needed to position the button. Adjust the width as needed */
+.container
+{
+    position: relative;
+    width: 50%;
+}
+
+/* Make the image responsive */
+.container img
+{
+    width: 50%;
+    height: auto;
+}
+
+.container .btn
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.container .btn:hover
+{
+    background-color: black;
+}
+
+p
+{
+    color: teal;
+}
+
+.glow
+{
+    font-size: 80px;
+    color: #fff;
+    text-align: center;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow
+{
+    from
+    {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+
+    }
+    to
+    {
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+
+    }
+}
+
+#spiritt
+{
+    font-style: oblique;
+    font-size: 60px;
+}
