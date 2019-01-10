@@ -6,14 +6,14 @@ Create a single page application which comprises of a form which users can fill 
 
 The form should gather the following information:
 
-- Name
-- Gender
-- Pronoun
-- Hometown
-- Three favorite foods
-- Birthday
-- HUID
-- Concentration
+- Name - text
+- Gender - dropdown
+- Pronoun - radio buttons 
+- Hometown - text input
+- Three favorite foods - input
+- Birthday - input type date
+- HUID - numerical input
+- Concentration - dropdown
 
 After gathering this information, the form should have a submit button. When this button is clicked, a dynamically generated text should appear below the form, saying 'User's name is USER_NAME, and USER_PRONOUN are from USER_HOMETOWN. USER_PRONOUN was born on USER_BIRTHDAY, and USER_PRONOUN favorite foods are FOOD_1, FOOD_2, and FOOD_3. At Harvard, USER_NAME studies USER_CONCENTRATION.'
 
